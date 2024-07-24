@@ -1,0 +1,1 @@
+web: gununicorn learning_log.wsgi --log-file -
