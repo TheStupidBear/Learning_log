@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,3 +136,9 @@ LOGIN_URL = 'users/login/'
 #настройки Heroku
 import django_heroku
 django_heroku.settings(locals())
+
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = False
+
