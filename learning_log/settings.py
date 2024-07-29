@@ -137,5 +137,8 @@ LOGIN_URL = 'users/login/'
 import django_heroku
 django_heroku.settings(locals())
 
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = False
 
