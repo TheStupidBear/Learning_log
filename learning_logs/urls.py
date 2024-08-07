@@ -17,4 +17,6 @@ urlpatterns = [
     path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
     #страница для редактирования записи по конкретной теме
     path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
+    #страница для просмотра записи и комментариев
+    path('open_entry/<int:entry_id>/', views.open_entry, name='open_entry'),
     ]

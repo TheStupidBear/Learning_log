@@ -1,0 +1,42 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+	<h3>{{entry}}</h3>
+{% endblock page_header %}
+
+
+{% block content %}
+
+	<p>Владелец записи: {{entry.owner}}</p>
+  	{{ entry.text |linebreaks }}
+
+  	<h3>Комментарии</h3>
+  	{% for comment in comments %}
+	  <div class="card mb-3">
+		  <div class="card-header">
+		  	{{comment.date_added| date:'M d, Y H:i' }}
+		  	{{comment.owner}}
+		  </div>
+		  <div class="card-body">
+		  	{{ comment.text |linebreaks}} 
+		    
+		  </div>
+      </div>
+	  
+	{% empty %}
+	  <li>Нет комментариев</li>
+	{% endfor %}
+	
+	
+	<form method="post" action="{% url 'learning_logs:open_entry' entry.id %}" class='form'>
+	    {% csrf_token %}
+	    {% bootstrap_form form %}
+	    {% buttons %}
+	      <button type="submit" class="btn btn-dark">Добавить комментарий</button>
+	    {% endbuttons %}
+	</form>
+
+{% endblock content %}
+
+	

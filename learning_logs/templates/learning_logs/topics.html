@@ -1,17 +1,18 @@
 {% extends "learning_logs/base.html" %}
-
+{% load bootstrap4 %}
 
 {% block page_header %}
 	<h1>Темы</h1>
 {% endblock page_header %}
 
 {% block content%}
-  <ul>
+  <ul class="list-group list-group-flush">
     {% for topic in topics %}
-	  <li>
-	  	<h3>
-	    	<a href="{% url 'learning_logs:topic' topic.id %}">{{topic}}</a>
-	    </h3>
+	  <li class="list-group-item">
+	  	<h4>
+	  		<a href="{% url 'learning_logs:topic' topic.id %}">{{topic}}</a>
+	  	</h4>
+	  	
 	  </li>
 	{% empty %}
 	  <li><h3>Нет тем, создайте новую тему</h3></li>
@@ -21,3 +22,4 @@
   	<a href="{% url 'learning_logs:new_topic' %}">Создать новую тему</a>
   </h3>
 {% endblock content %}
+

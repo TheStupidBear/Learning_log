@@ -5,16 +5,23 @@
 {% endblock page_header %}
 
 {% block content%}
-  <p><a href="{% url 'learning_logs:new_entry' topic.id %}">Добавить новую запись</a></p>
+	<p><a href="{% url 'learning_logs:new_entry' topic.id %}">Добавить новую запись</a></p>
+	<p>Владелец темы: {{topic.owner}}</p>
+  	
 
   {% for entry in entries %}
 	  <div class="card mb-3">
 		  <div class="card-header">
-		    {{entry.date_added| date:'M d, Y H:i' }} 
-		    <a href="{% url 'learning_logs:edit_entry' entry.id %}">Редактировать запись</a>
+		  	<p><a href="{% url 'learning_logs:open_entry' entry.id %}">{{ entry.name}} </a></p>
+		  	{{entry.date_added| date:'M d, Y H:i' }} 
+		    {{entry.owner}}
+		    {% if request.user == entry.owner %}
+		    	<a href="{% url 'learning_logs:edit_entry' entry.id %}">Редактировать запись</a>
+		    {% endif %}
 		  </div>
 		  <div class="card-body">
-		    {{ entry.text |linebreaks }}
+		  	{{ entry.text |linebreaks |truncatechars:200}} 
+		    
 		  </div>
     </div>
 	  
